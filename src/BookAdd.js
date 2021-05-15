@@ -19,16 +19,19 @@ class BookAdd extends Component {
         }));
         BooksAPI.search(value).then((response) => {
             console.log(response);
+            var books = [];
             if (response && !response['error']) {
-                this.setState(() => ({
-                    books: response.map((book) => {
-                        const bookInShelf = this.props.booksInShelf[book.id];
-                        const shelf = bookInShelf ? bookInShelf["shelf"] : '';
-                        book.shelf = shelf;
-                        return book
-                    })
-                }))
-            }
+                books = response.map((book) => {
+                    const bookInShelf = this.props.booksInShelf[book.id];
+                    const shelf = bookInShelf ? bookInShelf["shelf"] : '';
+                    book.shelf = shelf;
+                    return book
+                })
+            };
+            this.setState(() => ({
+                books: books
+            }))
+
         }, (error) => {})
     };
 
