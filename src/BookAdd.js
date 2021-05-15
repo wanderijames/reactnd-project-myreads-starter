@@ -17,10 +17,11 @@ class BookAdd extends Component {
         this.setState(() => ({
             searchQuery: value
         }));
-        BooksAPI.search(value).then((searchedBooks) => {
-            if (searchedBooks) {
+        BooksAPI.search(value).then((response) => {
+            console.log(response);
+            if (response && !response['error']) {
                 this.setState(() => ({
-                    books: searchedBooks.map((book) => {
+                    books: response.map((book) => {
                         const bookInShelf = this.props.booksInShelf[book.id];
                         const shelf = bookInShelf ? bookInShelf["shelf"] : '';
                         book.shelf = shelf;

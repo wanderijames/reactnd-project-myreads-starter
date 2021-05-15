@@ -20,7 +20,6 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
         const myBooks = Object.fromEntries(books.map((book) => ([book.id, book])));
-        console.log(Object.values(myBooks).filter(book => book.title === 'The Linux Command Line'));
         this.setState(() => ({
             books: myBooks
         }))
